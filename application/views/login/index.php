@@ -60,7 +60,7 @@
         <div class="error alert alert-danger">
           <strong>¡Error de Ingreso!</strong> Usuario o clave incorrectos.
         </div>
-      <?php endif;?>
+    <?php endif;?>
             </form>
           </section>
         </div>        

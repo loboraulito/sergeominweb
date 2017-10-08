@@ -30,7 +30,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form action="login/login" method="post">
               <h1>Inicio de Sesión</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Usuario" required="" name="usuario" id="usuario" />
@@ -39,7 +39,8 @@
                 <input type="password" class="form-control" placeholder="Clave" required="" name="clave" id="clave"/>
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Ingresar</a>                
+                <input type="submit" class="btn btn-default submit" value="Ingresar">
+                </input>                
               </div>
 
               <div class="clearfix"></div>
@@ -54,10 +55,18 @@
                   <p>©2017 Derechos Reservados Sergeomin</p>
                 </div>
               </div>
+              </div>
+    <?php if($error==1):?>
+        <div class="error alert alert-danger">
+          <strong>¡Error de Ingreso!</strong> Usuario o clave incorrectos.
+        </div>
+      <?php endif;?>
             </form>
           </section>
         </div>        
       </div>
-    </div>
+
+       
+
   </body>
 </html>

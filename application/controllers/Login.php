@@ -35,12 +35,33 @@ class Login extends CI_Controller {
 	    $usuario = $this->input->post('usuario');
 	    $clave = $this->input->post('clave');
 	    $usuario = $this->usuario_model->login($usuario, $clave);
-	    if($usuario) redirect('welcome','refresh');
+	    if(count($usuario)!=0){
+	    	$session = array(
+	            'id_usuario' => $usuario['id_usuario'],
+	            'usuario' => $usuario['usuario'],
+	            'rol' => $usuario['rol'],
+	            'id_rol' => $usuario['id_rol'],
+	            'estado' => $usuario['estado'],
+	            'id_empleado' => $usuario['id_empleado'],
+	        );
+	        $this->session->set_userdata($session);
+	        print_r($this->session);
+	    } 
 	    else redirect('login?error=1','refresh');
+	    if($this->session->userdata('id_rol')==1){
+	    	redirect('welcome','refresh');
+	    }
+	    else {
+	    	echo 'error';
+	    	print_r($this->session);
+	    }
 	}
 
 	public function logout()
 	{
-		$this->load->view('login/logout');
-	}
+		$data = array();
+	    $this->session->sess_destroy();
+	    redirect('login/login','refresh');
+		//$this->load->view('login/logout');
+	}	    
 }

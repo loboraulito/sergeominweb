@@ -51,7 +51,14 @@ class Usuario_model extends CI_Model{
     
     function login($username, $password)
     {
-        $query = $this->db->query('SELECT * FROM usuario WHERE usuario = ? AND clave = md5(?)', array($username, $password));
+        $query = $this->db->query('
+            SELECT * 
+            FROM usuario u
+                JOIN roles_usuario ru on (ru.id_usuario = u.id_usuario)
+                JOIN rol r on (ru.id_rol = r.id_rol)
+            WHERE u.usuario = ? 
+            AND u.clave = md5(?)', 
+            array($username, $password));
         return $query->row_array();
     }
 }// fin class

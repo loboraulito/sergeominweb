@@ -45,7 +45,7 @@ class Login extends CI_Controller {
 	            'id_empleado' => $usuario['id_empleado'],
 	        );
 	        $this->session->set_userdata($session);
-	        print_r($this->session);
+	        //print_r($this->session);
 	    } 
 	    else redirect('login?error=1','refresh');
 	    if($this->session->userdata('id_rol')==1){

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Empleado extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,18 +26,14 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		if($this->session->userdata('id_rol')==1){
-			$data['contenido'] = 'welcome_message'; 
+			$data['contenido'] = 'administracion/index'; 
 			$data['usuario'] = $this->session->userdata('usuario');	  
+			$data['empleados']=$this->empleado_model->get_empleados();
 			$datosCapsula['data']=$data;  
 			$this->load->view('template/template',$datosCapsula);
 		}else{
 			redirect('login','refresh');
 		}
 	}
-
-	public function saludar(){
-		//$this->load->model('empleado_model');
-		 $data['empleados'] = $this->empleado_model->get_empleados();
-		$this->load->view('saludar',$data);
-	}
+	
 }

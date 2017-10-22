@@ -16,8 +16,47 @@
     <!-- NProgress -->
     <link href="/sergeominweb/public/vendors/nprogress/nprogress.css" rel="stylesheet">
 
+    <!-- iCheck -->
+    <link href="/sergeominweb/public/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link href="/sergeominweb/public/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="/sergeominweb/public/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="/sergeominweb/public/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="/sergeominweb/public/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="/sergeominweb/public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
     <!-- Custom Theme Style -->
     <link href="/sergeominweb/public/build/css/custom.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="/sergeominweb/public/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/sergeominweb/public/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/sergeominweb/public/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/sergeominweb/public/vendors/nprogress/nprogress.js"></script>
+
+    <!-- iCheck -->
+    <script src="/sergeominweb/public/vendors/iCheck/icheck.min.js"></script>
+    <!-- Datatables -->
+    <script src="/sergeominweb/public/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="/sergeominweb/public/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="/sergeominweb/public/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="/sergeominweb/public/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/sergeominweb/public/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    
   </head>
 
   <body class="nav-md">
@@ -53,8 +92,8 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i> Administrador <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.html">Empleados</a></li>
-                      <li><a href="index2.html">Usuarios</a></li>                      
+                      <li><a href="administracion/empleado/index">Empleados</a></li>
+                      <li><a href="usuario/index">Usuarios</a></li>                      
                     </ul>
                   </li>                  
                 </ul>

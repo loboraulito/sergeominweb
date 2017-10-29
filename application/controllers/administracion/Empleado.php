@@ -36,4 +36,32 @@ class Empleado extends CI_Controller {
 		}
 	}
 	
+	public function nuevo(){
+        $data = array(
+                'nombre'=>$this->input->post('nombre'),
+                'apellido_paterno'=>$this->input->post('apellido_paterno'),
+                'apellido_materno'=>$this->input->post('apellido_materno')              
+            );
+        $this->empleado_model->insert($data);
+	}
+
+	public function editar($id){
+	    $data = array(	        
+	        'nombre'=>$this->input->post('nombre'),
+            'apellido_paterno'=>$this->input->post('apellido_paterno'),
+            'apellido_materno'=>$this->input->post('apellido_materno')     
+	    );
+	    
+	    $this->empleado_model->update($id,$data);
+	}
+    
+    public function borrar($id){      
+        
+        $this->empleado_model->delete($id);
+    }
+
+    public function activar($id){      
+        
+        $this->empleado_model->activar($id);
+    }
 }

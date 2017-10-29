@@ -55,6 +55,7 @@
     <script src="/sergeominweb/public/vendors/jszip/dist/jszip.min.js"></script>
     <script src="/sergeominweb/public/vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="/sergeominweb/public/vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script src="/sergeominweb/public/vendors/bootstrap-validator/validator.min.js"></script>
 
     
   </head>
@@ -136,7 +137,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">                    
-                    <li><a href="login/logout"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</a></li>
+                    <li><a href="<?php echo site_url('login/logout');?>"><i class="fa fa-sign-out pull-right"></i>Cerrar Sesión</a></li>
                   </ul>
                 </li>                
               </ul>

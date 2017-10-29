@@ -50,6 +50,17 @@
             </tr>  
             <?php endforeach;?>  
           </table>
+
+          <table id="tabla2" class="table table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>id</th>
+                <th>nombre</th>
+                <th>apellido_paterno</th>
+                <th>apellido_materno</th>
+              </tr> 
+            </thead>           
+          </table>
         </div>
       </div>
     </div>
@@ -68,8 +79,18 @@ $(function() {
       $(this).each (function() { this.reset(); });
     }
 
-  $('#tabla').DataTable( {
-    data: js_obj_data
+  $('#tabla2').DataTable( {
+    language:{
+      "url":"/sergeominweb/public/vendors/datatables.net/js/Spanish.json"
+    },
+    data: js_obj_data,
+    "columns":[
+      {"data":"id_empleado"},
+      {"data":"nombre"},
+      {"data":"apellido_paterno"},
+      {"data":"apellido_materno"}
+    ]
+
 } );
   
 });

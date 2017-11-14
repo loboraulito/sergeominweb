@@ -26,7 +26,12 @@ class Usuario_model extends CI_Model{
         return $query->result();
     }
     
-       
+    function get_usuarios_empleado($id_empleado){
+        $query = $this->db->query('SELECT * FROM usuario')
+                            ->where('id_empleado', $id_empleado);
+        return $query->result();
+    }
+
     public function get_todos_limite($limite, $inicio) {
         $this->db->limit($limite, $inicio);
         $query = $this->db->get("usuario");        

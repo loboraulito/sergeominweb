@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Clientes</h2>
+            <h2>Solicitudes del Cliente</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>             
@@ -23,17 +23,17 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <h2>Lista de Clientes</h2> 
+            <h2>Lista de Solicitudes</h2> 
             <button class="btn btn-default btn-success" onclick="nuevo()">Nuevo</button>
             <?php //print_r($empleados);?>
             <table id="tabla" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Nombre Empresa</th>
-                  <th>NIT</th>
-                  <th>Nombre Responsable</th>
-                  <th>CI</th>
+                  <th>Nro de Orden</th>
+                  <th>Hoja de Ruta</th>
+                  <th>Cantidad Muestras</th>
+                  <th>Tipo de Muestra</th>
+                  <th>Procedencia</th>
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -60,22 +60,10 @@
           <form id="form" class="form-horizontal" data-toggle="validator" role="form" >
             <fieldset>
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="nombre_empresa">Nombre Empresa</label>
+                <label class="col-md-4 control-label" for="numero_hoja_ruta">numero_hoja_ruta</label>
                 <div class="input-group col-md-7">
-                  <input id="nombre_empresa" name="nombre_empresa"
-                    placeholder="Nombre de Empresa"
-                    class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="numero_ci">CI</label>
-                <div class="input-group col-md-7">
-                  <input id="numero_ci" name="numero_ci"
-                    placeholder="numero_ci"
+                  <input id="numero_hoja_ruta" name="numero_hoja_ruta"
+                    placeholder="numero_hoja_ruta"
                     class="form-control input-md" type="text"
                     pattern="^[A-z0-9]{1,}$" required
                     data-error="Campo Obligatorio solo letras y números"> <span
@@ -84,22 +72,35 @@
                 </div>
               </div>
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="nombre_responsable">Nombre Responsable</label>
+                <label class="col-md-4 control-label" for="cantidad_muestras">cantidad_muestras</label>
                 <div class="input-group col-md-7">
-                  <input id="nombre_responsable" name="nombre_responsable"
-                    placeholder="nombre_responsable"
+                  <input id="cantidad_muestras" name="cantidad_muestras"
+                    placeholder="cantidad_muestras"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
+                    pattern="^[0-9]{1,}$" required
                     data-error="Campo Obligatorio solo letras y números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
+             <!-- Text input-->
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="nit">NIT</label>
+                <label class="col-md-4 control-label" for="clave">tipo_muestra</label>
                 <div class="input-group col-md-7">
-                  <input id="nit" name="nit"
-                    placeholder="nit"
+                  <select class="select2_single form-control" tabindex="-1" name="tipo_muestra">
+                    <option></option>                    
+                    <option value="Agua">Agua</option>
+                    <option value="Mineral">Mineral</option>                    
+                  </select>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="procedencia">procedencia</label>
+                <div class="input-group col-md-7">
+                  <input id="procedencia" name="procedencia"
+                    placeholder="procedencia"
                     class="form-control input-md" type="text"
                     pattern="^[A-z0-9]{1,}$" required
                     data-error="Campo Obligatorio solo letras y números"> <span
@@ -108,65 +109,17 @@
                 </div>
               </div>
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="direccion">Dirección</label>
+                <label class="col-md-4 control-label" for="fecha_entrega">fecha_entrega</label>
                 <div class="input-group col-md-7">
-                  <input id="direccion" name="direccion"
-                    placeholder="Nombre de direccion"
+                  <input id="fecha_entrega" name="fecha_entrega"
+                    placeholder="fecha_entrega"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z\s]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="numero_celular">Numero de Celular</label>
-                <div class="input-group col-md-7">
-                  <input id="numero_celular" name="numero_celular"
-                    placeholder="numero_celular"
-                    class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="numero_telefono">Número Telefono</label>
-                <div class="input-group col-md-7">
-                  <input id="numero_telefono" name="numero_telefono"
-                    placeholder="numero_telefono"
-                    class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="departamento">departamento</label>
-                <div class="input-group col-md-7">
-                  <input id="departamento" name="departamento"
-                    placeholder="departamento"
-                    class="form-control input-md" type="text"
-                    pattern="^[A-z\s]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="email">email</label>
-                <div class="input-group col-md-7">
-                  <input id="email" name="email"
-                    placeholder="email"
-                    class="form-control input-md" type="email"
                     required
                     data-error="Campo Obligatorio solo letras y números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
-              </div>
+              </div>              
             </fieldset>
           </form>
         </div>
@@ -203,7 +156,7 @@
 </div>
 
 <script>
-var js_data = '<?php echo json_encode($clientes); ?>';
+var js_data = '<?php echo json_encode($solicitud_analisis_lqs); ?>';
 var js_obj_data = JSON.parse(js_data);
 var tabla;
 var a;
@@ -221,15 +174,15 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_usuario"},
-      {"data":"nombre_empresa"},
-      {"data":"nit"},
-      {"data":"nombre_responsable"},
-      {"data":"numero_ci"},
+      {"data":"id_solicitud_analisis_lq"},
+      {"data":"numero_hoja_ruta"},
+      {"data":"cantidad_muestras"},
+      {"data":"tipo_muestra"},
+      {"data":"procedencia"},
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
-          return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-success btn-solicitud'>Solicitudes</button>";
+          return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-success btn-muestras'>Muestras</button>";
         }
       }
     ]
@@ -251,18 +204,26 @@ $(function() {
     activar( data['id_cliente']);     
   } );
 
-  $('#tabla tbody').on( 'click','.btn-solicitud', function () {
+  $('#tabla tbody').on( 'click','.btn-muestras', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    location = "<?php echo site_url('recepcionista/solicitud_analisis_lq/por_cliente/') ?>"+data['id_cliente'];    
+    location = "<?php echo site_url('recepcionista/prueba_lab_quimico/por_solicitud/') ?>"+data['id_solicitud_analisis_lq'];    
   } );
+
+  $('#fecha_entrega').datepicker({
+    language: 'es',
+    autoclose: true,
+    format: 'yyyy-mm-dd',
+    startDate: '+0d'
+  });
 });
 
 function guardar_nuevo(){
   if(!$('#form').find('.has-error').length) {
-    var datos=$('#form').serializeArray();    
+    var datos=$('#form').serializeArray();   
+    datos.push({name: 'id_cliente', value: <?php echo $id_cliente?>});
     $.ajax({
         type: "POST",
-        url: '<?php echo site_url('recepcionista/cliente/nuevo');?>',
+        url: '<?php echo site_url('recepcionista/solicitud_analisis_lq/nuevo');?>',
         data: datos,
         success: function(response){ $('#nuevo').modal('hide');location.reload();},
         error: function(){alert('Formulario con errores al crear nuevo usuario');}

@@ -51,7 +51,9 @@ class Login extends CI_Controller {
 	    if($this->session->userdata('id_rol')==1){
 	    	redirect('welcome','refresh');
 	    }
-	    else {
+	    else if($this->session->userdata('id_rol')==3){
+	    	redirect('recepcionista/cliente','refresh');
+	    }else{
 	    	echo 'error';
 	    	print_r($this->session);
 	    }

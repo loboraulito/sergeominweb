@@ -7,6 +7,8 @@ class Usuario_model extends CI_Model{
     {
         $this->db->set($data);
         $this->db->insert('usuario',$data);
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
     }
 
     function update($id, $data)
@@ -27,8 +29,12 @@ class Usuario_model extends CI_Model{
     }
     
     function get_usuarios_empleado($id_empleado){
-        $query = $this->db->query('SELECT * FROM usuario')
-                            ->where('id_empleado', $id_empleado);
+        $query = $this->db->query(
+            'SELECT u.id_usuario, u.usuario,u.id_empleado,u.estado as u_estado,r.id_rol, ru.estado as ru_estado,r.rol 
+            from usuario u
+            join roles_usuario ru on (u.id_usuario = ru.id_usuario)
+            join rol r on (r.id_rol = ru.id_rol) where id_empleado =?',array($id_empleado)
+        );
         return $query->result();
     }
 

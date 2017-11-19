@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Usuario extends CI_Controller {
+class Cliente extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,10 +25,10 @@ class Usuario extends CI_Controller {
 	
 	public function index()
 	{
-		if($this->session->userdata('id_rol')==1){
-			$data['contenido'] = 'administracion/index'; 
+		if($this->session->userdata('id_rol')==3){
+			$data['contenido'] = 'recepcionista/cliente'; 
 			$data['usuario'] = $this->session->userdata('usuario');	  
-			$data['usuarios']=$this->usuario_model->get_usuarios();			
+			$data['clientes']=$this->cliente_model->get_todos();
 			$datosCapsula['data']=$data;  
 			$this->load->view('template/template',$datosCapsula);
 		}else{
@@ -36,15 +36,10 @@ class Usuario extends CI_Controller {
 		}
 	}
 	
-	public function nuevo(){
+	public function nuevo(){   
 		$data = $this->input->post();
-		$data_usuario['id_empleado'] = $data['id_empleado'];
-		$data_usuario['usuario'] = $data['usuario'];
-		$data_usuario['clave'] = md5($data['clave']);
-        $id_usuario = $this->usuario_model->insert($data_usuario);
-        $data_rol['id_usuario'] = $id_usuario;
-        $data_rol['id_rol'] = $data['id_rol'];
-        $this->roles_usuario_model->insert($data_rol);
+		$data['id_usuario'] = $this->session->id_usuario;    
+        $this->cliente_model->insert($data);
 	}
 
 	public function editar($id){
@@ -54,30 +49,16 @@ class Usuario extends CI_Controller {
             'apellido_materno'=>$this->input->post('apellido_materno')     
 	    );
 	    
-	    $this->usuario_model->update($id,$data);
+	    $this->cliente_model->update($id,$data);
 	}
     
     public function borrar($id){      
         
-        $this->usuario_model->delete($id);
+        $this->cliente_model->delete($id);
     }
 
     public function activar($id){      
         
-        $this->usuario_model->activar($id);
-    }
-
-    public function listar_usuarios_empleado($id_empleado){
-    	if($this->session->userdata('id_rol')==1){
-			$data['contenido'] = 'administracion/usuarios'; 
-			$data['usuario'] = $this->session->userdata('usuario');	  
-			$data['usuarios']=$this->usuario_model->get_usuarios_empleado($id_empleado);
-			$data['roles']=$this->rol_model->get_todos();
-			$data['id_empleado']=$id_empleado;
-			$datosCapsula['data']=$data;  
-			$this->load->view('template/template',$datosCapsula);
-		}else{
-			redirect('login','refresh');
-		}
+        $this->cliente_model->activar($id);
     }
 }

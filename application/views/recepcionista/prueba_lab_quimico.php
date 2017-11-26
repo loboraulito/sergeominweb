@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Solicitudes del Cliente</h2>
+            <h2>Analisis por:</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>             
@@ -23,17 +23,15 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <h2>Lista de Solicitudes</h2> 
+            <h2>Lista de Analisis:</h2> 
             <button class="btn btn-default btn-success" onclick="nuevo()">Nuevo</button>
             <?php //print_r($empleados);?>
             <table id="tabla" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Nro de Orden</th>
-                  <th>Hoja de Ruta</th>
-                  <th>Cantidad Muestras</th>
-                  <th>Tipo de Muestra</th>
-                  <th>Procedencia</th>
+                  <th>Codigo</th>
+                  <th>Elementos</th>
+                  <th>Nro de Analisis</th>                  
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -54,70 +52,32 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Cliente</h4>
+          <h4 class="modal-title" id="myModalLabel">Prueba Lab Quimico</h4>
         </div>
         <div class="modal-body">
           <form id="form" class="form-horizontal" data-toggle="validator" role="form" >
             <fieldset>
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="numero_hoja_ruta">numero_hoja_ruta</label>
+                <label class="col-md-4 control-label" for="codigo_muestra_cliente">codigo_muestra_cliente</label>
                 <div class="input-group col-md-7">
-                  <input id="numero_hoja_ruta" name="numero_hoja_ruta"
-                    placeholder="numero_hoja_ruta"
-                    class="form-control input-md" type="text"
-                    pattern="^[A-z0-9]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="cantidad_muestras">cantidad_muestras</label>
-                <div class="input-group col-md-7">
-                  <input id="cantidad_muestras" name="cantidad_muestras"
-                    placeholder="cantidad_muestras"
-                    class="form-control input-md" type="text"
-                    pattern="^[0-9]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-             <!-- Text input-->
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="clave">tipo_muestra</label>
-                <div class="input-group col-md-7">
-                  <select class="select2_single form-control" tabindex="-1" name="tipo_muestra">
-                    <option></option>                    
-                    <option value="Agua">Agua</option>
-                    <option value="Mineral">Mineral</option>                    
-                  </select>
-                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="procedencia">procedencia</label>
-                <div class="input-group col-md-7">
-                  <input id="procedencia" name="procedencia"
-                    placeholder="procedencia"
-                    class="form-control input-md" type="text"
-                    pattern="^[A-z0-9]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
-                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
-                  <div class="help-block with-errors"></div>
-                </div>
-              </div>
-              <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="fecha_entrega">fecha_entrega</label>
-                <div class="input-group col-md-7">
-                  <input id="fecha_entrega" name="fecha_entrega"
-                    placeholder="fecha_entrega"
+                  <input id="codigo_muestra_cliente" name="codigo_muestra_cliente"
+                    placeholder="codigo_muestra_cliente"
                     class="form-control input-md" type="text"
                     required
                     data-error="Campo Obligatorio solo letras y números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="codigo_muestra_cliente">elementos</label>
+                <div class="input-group col-md-7">
+                  <select data-placeholder="Choose a Country..." class="chosen-select" multiple tabindex="4">
+                    <option value=""></option>
+                    <?php foreach ($cotizaciones as $key => $cotizacion):?>
+                      <option value="<?php echo $cotizacion->id_cotizacion;?>"><?php echo $cotizacion->elemento;?></option>
+                    <?php endforeach;?>
+                  </select>
                 </div>
               </div>              
             </fieldset>
@@ -156,7 +116,7 @@
 </div>
 
 <script>
-var js_data = '<?php echo json_encode($solicitud_analisis_lqs); ?>';
+var js_data = '<?php echo json_encode($prueba_lab_quimicos); ?>';
 var js_obj_data = JSON.parse(js_data);
 var tabla;
 var a;
@@ -174,11 +134,9 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_solicitud_analisis_lq"},
-      {"data":"numero_hoja_ruta"},
-      {"data":"cantidad_muestras"},
-      {"data":"tipo_muestra"},
-      {"data":"procedencia"},
+      {"data":"codigo_muestra_cliente"},
+      {"data":"elementos"},
+      {"data":"id_prueba_lab_quimico"},      
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
@@ -191,89 +149,51 @@ $(function() {
 
   $('#tabla tbody').on( 'click','.btn-editar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    editar( data['id_cliente']);     
+    editar( data['id_prueba_lab_quimico']);     
   } );
   
   $('#tabla tbody').on( 'click','.btn-borrar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    borrar( data['id_cliente']);     
+    borrar( data['id_prueba_lab_quimico']);     
   } );
 
   $('#tabla tbody').on( 'click','.btn-activar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    activar( data['id_cliente']);     
+    activar( data['id_prueba_lab_quimico']);     
   } );
 
   $('#tabla tbody').on( 'click','.btn-muestras', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    location = "<?php echo site_url('recepcionista/prueba_lab_quimico/por_solicitud/') ?>"+data['id_solicitud_analisis_lq'];    
+    location = "<?php echo site_url('recepcionista/prueba_lab_quimico/por_solicitud/') ?>"+data['id_prueba_lab_quimico'];    
   } );
 
   $('#fecha_entrega').datepicker(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   {
     language: 'es',
     autoclose: true,
     format: 'yyyy-mm-dd',
     startDate: '+0d'
   });
+
+  $(".chosen-select").chosen({
+    disable_search_threshold: 10,
+    no_results_text: "Oops, nothing found!",
+    width: "95%"
+  });
 });
 
 function guardar_nuevo(){
   if(!$('#form').find('.has-error').length) {
     var datos=$('#form').serializeArray();   
-    datos.push({name: 'id_cliente', value: <?php echo $id_cliente?>});
+    datos.push({name: 'id_solicitud_analisis_lq', value: <?php echo $id_solicitud_analisis_lq?>});
+    //console.log(datos);
+    var values = $('.chosen-select').val();
+    //console.log(values);
+    //var elems = values.split(',');
+    datos.push({name: 'elementos', value: values});
     $.ajax({
         type: "POST",
-        url: '<?php echo site_url('recepcionista/solicitud_analisis_lq/nuevo');?>',
+        url: '<?php echo site_url('recepcionista/prueba_lab_quimico/nuevo');?>',
         data: datos,
         success: function(response){ $('#nuevo').modal('hide');location.reload();},
         error: function(){alert('Formulario con errores al crear nuevo usuario');}
@@ -304,7 +224,7 @@ function nuevo(){
 
 function buscar(id) {
   return js_obj_data.filter(
-          function(data){return data.id_cliente == id}
+          function(data){return data.id_prueba_lab_quimico == id}
       );
   } 
 

@@ -28,7 +28,10 @@ class Prueba_lab_quimico extends CI_Controller {
 		if($this->session->userdata('id_rol')==3){
 			$data['contenido'] = 'recepcionista/prueba_lab_quimico'; 
 			$data['usuario'] = $this->session->userdata('usuario');	  
-			$data['prueba_lab_quimicos']=$this->prueba_lab_quimico_model->get_por_id_cliente($id_cliente);
+			$data['prueba_lab_quimicos']=$this->prueba_lab_quimico_model->get_todos_con_elementos($id_solicitud_analisis_lq);
+			$data['solicitud_analisis_lq']=$this->solicitud_analisis_lq_model->get($id_solicitud_analisis_lq);
+			$data['cotizaciones']=$this->cotizacion_model->get_por_tipo_cotizacion($data['solicitud_analisis_lq']->tipo_muestra);
+			
 			$data['id_solicitud_analisis_lq'] = $id_solicitud_analisis_lq;	  
 			$datosCapsula['data']=$data;  
 			$this->load->view('template/template',$datosCapsula);
@@ -38,9 +41,18 @@ class Prueba_lab_quimico extends CI_Controller {
 	}
 	
 	public function nuevo(){   
-		$data = $this->input->post();
-		$data['id_usuario'] = $this->session->id_usuario;    
-        $this->prueba_lab_quimico_model->insert($data);
+		//$data = $this->input->post();
+		$data = array(	        
+	        'codigo_muestra_cliente'=>$this->input->post('codigo_muestra_cliente'),
+            'id_solicitud_analisis_lq'=>$this->input->post('id_solicitud_analisis_lq')            
+	    );
+		//$data['id_usuario'] = $this->session->id_usuario;   
+		//print_r($data); 
+		//print_r($this->input->post('elementos')); 
+		$elementos = explode(',', $this->input->post('elementos'));
+		//print_r($elems);
+        $id_prueba_lab_quimico = $this->prueba_lab_quimico_model->insert($data);
+        $this->elemento_prueba_model->insert_elementos($id_prueba_lab_quimico,$elementos);
 	}
 
 	public function editar($id){

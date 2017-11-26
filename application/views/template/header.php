@@ -25,9 +25,11 @@
     <link href="/sergeominweb/public/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
     <link href="/sergeominweb/public/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
     <link href="/sergeominweb/public/vendors/bootstrap-datetimepicker/build/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="/sergeominweb/public/vendors/choosen/chosen.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="/sergeominweb/public/build/css/custom.min.css" rel="stylesheet">
+
 
     <!-- jQuery -->
     <script src="/sergeominweb/public/vendors/jquery/dist/jquery.min.js"></script>
@@ -60,6 +62,7 @@
     <script src="/sergeominweb/public/vendors/moment/min/moment.min.js"></script>
     <script src="/sergeominweb/public/vendors/bootstrap-datetimepicker/build/js/bootstrap-datepicker.min.js"></script>
     <script src="/sergeominweb/public/vendors/bootstrap-datetimepicker/build/js/bootstrap-datepicker.es.min.js"></script>
+    <script src="/sergeominweb/public/vendors/choosen/chosen.jquery.min.js"></script>
     
   </head>
 

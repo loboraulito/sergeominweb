@@ -109,7 +109,8 @@
                   <li><a><i class="fa fa-home"></i> Recepcionista <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url('recepcionista/cliente/index') ?>">Clientes</a></li>
-                      <li><a href="<?php echo site_url('recepcionista/orden/index') ?>">Ordenes</a></li>
+                      <li><a href="<?php echo site_url('recepcionista/solicitud_analisis_lq/solicitudes') ?>">Lab. Químico</a></li>
+                      <li><a href="<?php echo site_url('recepcionista/solicitud_analisis_lm/solicitudes') ?>">Lab. Químico</a></li>
                     </ul>
                   </li>                  
                   <?php endif;?>

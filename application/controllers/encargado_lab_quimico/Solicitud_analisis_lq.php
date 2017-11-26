@@ -36,6 +36,20 @@ class Solicitud_analisis_lq extends CI_Controller {
 			redirect('login','refresh');
 		}
 	}
+
+  public function tecnico_elementos($id_solicitud_analisis_lq)
+  {
+    if($this->session->userdata('id_rol')==5){
+      $data['contenido'] = 'encargado_lab_quimico/solicitud_analisis_lq'; 
+      $data['usuario'] = $this->session->userdata('usuario');   
+      $data['solicitud_analisis_lqs']=$this->solicitud_analisis_lq_model->get_todos();
+      $data['id_cliente'] = 0;    
+      $datosCapsula['data']=$data;  
+      $this->load->view('template/template',$datosCapsula);
+    }else{
+      redirect('login','refresh');
+    }
+  }
 	
 	public function nuevo(){   
 		$data = $this->input->post();

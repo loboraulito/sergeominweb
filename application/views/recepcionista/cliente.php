@@ -221,7 +221,7 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_usuario"},
+      {"data":"id_cliente"},
       {"data":"nombre_empresa"},
       {"data":"nit"},
       {"data":"nombre_responsable"},

@@ -90,7 +90,7 @@
                   <select class="select2_single form-control" tabindex="-1" name="tipo_muestra">
                     <option></option>                    
                     <option value="Agua">Agua</option>
-                    <option value="Mineral">Mineral</option>                    
+                    <option value="Minerales">Minerales</option>                    
                   </select>
                   <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
@@ -182,7 +182,7 @@ $(function() {
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
-          return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-success btn-muestras'>Muestras</button>";
+          return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-success btn-muestras'>Muestras</button><button class='btn btn-info btn-imprimir'>Imprimir</button>";
         }
       }
     ]
@@ -207,6 +207,11 @@ $(function() {
   $('#tabla tbody').on( 'click','.btn-muestras', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
     location = "<?php echo site_url('recepcionista/prueba_lab_quimico/por_solicitud/') ?>"+data['id_solicitud_analisis_lq'];    
+  } );
+
+  $('#tabla tbody').on( 'click','.btn-imprimir', function () {
+    var data = tabla.row( $(this).parents('tr') ).data();
+    window.open( "<?php echo site_url('recepcionista/solicitud_analisis_lq/imprimir/') ?>"+data['id_solicitud_analisis_lq']);    
   } );
 
   $('#fecha_entrega').datepicker(

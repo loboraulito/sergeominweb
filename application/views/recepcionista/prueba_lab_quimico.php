@@ -140,7 +140,7 @@ $(function() {
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
-          return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-success btn-muestras'>Muestras</button>";
+          return "<button class='btn btn-primary btn-editar'>Editar</button>";
         }
       }
     ]
@@ -161,11 +161,7 @@ $(function() {
     var data = tabla.row( $(this).parents('tr') ).data();
     activar( data['id_prueba_lab_quimico']);     
   } );
-
-  $('#tabla tbody').on( 'click','.btn-muestras', function () {
-    var data = tabla.row( $(this).parents('tr') ).data();
-    location = "<?php echo site_url('recepcionista/prueba_lab_quimico/por_solicitud/') ?>"+data['id_prueba_lab_quimico'];    
-  } );
+  
 
   $('#fecha_entrega').datepicker(
   {

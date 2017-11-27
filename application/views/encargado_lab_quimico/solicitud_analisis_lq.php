@@ -153,7 +153,7 @@ $(function() {
   
   $('#tabla tbody').on( 'click','.btn-asignar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    location = "<?php echo site_url('encargado_lab_quimico/solicitud_analisis_lq/tecnico_elementos/') ?>"+data['id_solicitud_analisis_lq'];    
+    location = "<?php echo site_url('encargado_lab_quimico/solicitud_analisis_lq/tecnico_elementos/') ?>"+data['id_solicitud_analisis_lq'];
   } );
 
   $('#fecha_entrega').datepicker({

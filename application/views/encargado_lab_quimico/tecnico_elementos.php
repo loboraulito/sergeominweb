@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Solicitudes del Cliente</h2>
+            <h2>Técnicos Cotización</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>             
@@ -23,17 +23,16 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <h2>Lista de Solicitudes</h2> 
+            <h2>Lista de Asignaciones</h2> 
             
             <?php //print_r($empleados);?>
             <table id="tabla" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Nro de Orden</th>
-                  <th>Hoja de Ruta</th>
-                  <th>Cantidad Muestras</th>
-                  <th>Tipo de Muestra</th>
-                  <th>Procedencia</th>
+                  <th>Id</th>
+                  <th>Técnico</th>
+                  <th>Cotización</th>
+                  <th>Solicitud</th>
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -54,7 +53,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Prueba Lab Quimico</h4>
+          <h4 class="modal-title" id="myModalLabel">Asignación Técnico</h4>
         </div>
         <div class="modal-body">
           <form id="form" class="form-horizontal" data-toggle="validator" role="form" >

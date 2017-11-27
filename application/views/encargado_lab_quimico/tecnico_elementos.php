@@ -24,7 +24,7 @@
           </div>
           <div class="x_content">
             <h2>Lista de Asignaciones</h2> 
-            
+            <button class="btn btn-default btn-success" onclick="nuevo()">Nuevo</button>
             <?php //print_r($empleados);?>
             <table id="tabla" class="table table-striped table-bordered table-hover">
               <thead>
@@ -103,7 +103,7 @@
           <h4 class="modal-title" id="myModalLabel">¿Borrar?</h4>
         </div>
         <div class="modal-body">
-          Esta seguro de Borrar el Empleado
+          Esta seguro de Borrar el Registro
         </div>
         <div class="modal-footer">
           <button id="confirmar-guardar-btn" type="button" class="btn btn-primary" >Si</button>
@@ -116,7 +116,7 @@
 </div>
 
 <script>
-var js_data = '<?php echo json_encode($solicitud_analisis_lqs); ?>';
+var js_data = '<?php echo json_encode($tecnico_cotizaciones); ?>';
 var js_obj_data = JSON.parse(js_data);
 var tabla;
 var a;
@@ -134,11 +134,10 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_solicitud_analisis_lq"},
-      {"data":"numero_hoja_ruta"},
-      {"data":"cantidad_muestras"},
-      {"data":"tipo_muestra"},
-      {"data":"procedencia"},
+      {"data":"id_tecnico_cotizacion"},
+      {"data":"id_tecnico"},
+      {"data":"id_cotizacion"},
+      {"data":"id_tecnico_cotizacion"},
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
@@ -152,12 +151,12 @@ $(function() {
   
   $('#tabla tbody').on( 'click','.btn-asignar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    location = "<?php echo site_url('encargado_lab_quimico/solicitud_analisis_lq/tecnico_elementos/') ?>"+data['id_solicitud_analisis_lq'];    
+    location = "<?php echo site_url('encargado_lab_quimico/solicitud_analisis_lq/tecnico_elementos/') ?>"+data['id_tecnico_cotizacion'];    
   } );
 
   $('#tabla tbody').on( 'click','.btn-imprimir', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    window.open( "<?php echo site_url('recepcionista/solicitud_analisis_lq/imprimir/') ?>"+data['id_solicitud_analisis_lq']);    
+    window.open( "<?php echo site_url('recepcionista/solicitud_analisis_lq/imprimir/') ?>"+data['id_tecnico_cotizacion']);    
   } );
 
   $('#fecha_entrega').datepicker({
@@ -166,12 +165,18 @@ $(function() {
     format: 'yyyy-mm-dd',
     startDate: '+0d'
   });
+
+  $(".chosen-select").chosen({
+    disable_search_threshold: 10,
+    no_results_text: "Oops, no se encontro nada!",
+    width: "95%"
+  });
 });
 
 function guardar_nuevo(){
   if(!$('#form').find('.has-error').length) {
     var datos=$('#form').serializeArray();   
-    //datos.push({name: 'id_cliente', value: <?php echo $id_cliente?>});
+    //datos.push({name: 'id_cliente', value: });
     $.ajax({
         type: "POST",
         url: '<?php echo site_url('recepcionista/solicitud_analisis_lq/nuevo');?>',

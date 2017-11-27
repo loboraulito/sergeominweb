@@ -45,6 +45,7 @@ class Solicitud_analisis_lq extends CI_Controller {
       $data['tecnico_cotizaciones']=$this->tecnico_cotizacion_model->get_por_solicitud($id_solicitud_analisis_lq);
       $data['tecnicos']=$this->tecnico_model->get_todos();
       $data['id_solicitud_analisis_lq'] = $id_solicitud_analisis_lq;
+      $data['cotizaciones']=$this->cotizacion_model->get_por_solicitud($id_solicitud_analisis_lq);
       $datosCapsula['data']=$data;  
       $this->load->view('template/template',$datosCapsula);
     }else{

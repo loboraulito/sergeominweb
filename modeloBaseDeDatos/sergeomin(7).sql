@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.11
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2017 a las 19:24:36
--- Versión del servidor: 5.6.21
--- Versión de PHP: 5.6.3
+-- Tiempo de generación: 26-11-2017 a las 15:24:25
+-- Versión del servidor: 5.5.39
+-- Versión de PHP: 5.4.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `departamento` varchar(15) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `cliente`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `cotizacion` (
   `limite_deteccion` decimal(8,3) DEFAULT NULL,
   `unidades` varchar(15) DEFAULT NULL,
   `precio_unitario` decimal(5,2) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `cotizacion`
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `elemento_prueba` (
 `id_elemento_prueba` int(11) NOT NULL,
   `id_prueba_lab_quimico` int(11) NOT NULL,
   `id_cotizacion` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Volcado de datos para la tabla `elemento_prueba`
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `apellido_materno` varchar(45) DEFAULT NULL,
   `estado` char(1) NOT NULL DEFAULT 'A',
   `fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
@@ -141,7 +141,7 @@ CREATE TABLE IF NOT EXISTS `ensayo` (
   `equipo` varchar(45) DEFAULT NULL,
   `id_prueba_lab_quimico` int(11) NOT NULL,
   `id_tecnico` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `prueba_lab_quimico` (
   `id_cotizacion` int(11) DEFAULT NULL,
   `id_cliente` int(11) DEFAULT NULL,
   `id_solicitud_analisis_lq` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `prueba_lab_quimico`
@@ -180,7 +180,7 @@ INSERT INTO `prueba_lab_quimico` (`id_prueba_lab_quimico`, `numero_analisis`, `c
 CREATE TABLE IF NOT EXISTS `rol` (
 `id_rol` int(11) NOT NULL,
   `rol` varchar(15) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -206,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `roles_usuario` (
   `id_rol` int(11) NOT NULL,
   `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `roles_usuario`
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `solicitud_analisis_lq` (
   `numero_hoja_ruta` varchar(10) DEFAULT NULL,
   `id_usuario` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `solicitud_analisis_lq`
@@ -257,20 +257,7 @@ CREATE TABLE IF NOT EXISTS `tecnico` (
   `estado` char(1) DEFAULT NULL,
   `fecha_registro` timestamp NULL DEFAULT NULL,
   `id_empleado` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tecnico_cotizacion`
---
-
-CREATE TABLE IF NOT EXISTS `tecnico_cotizacion` (
-`id_tecnico_cotizacion` int(11) NOT NULL,
-  `id_tecnico` int(11) NOT NULL,
-  `id_cotizacion` int(11) NOT NULL,
-  `id_solicitud_analisis_lq` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -285,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id_empleado` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   `fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -363,12 +350,6 @@ ALTER TABLE `tecnico`
  ADD PRIMARY KEY (`id_tecnico`), ADD KEY `fk_tecnico_empleado1_idx` (`id_empleado`);
 
 --
--- Indices de la tabla `tecnico_cotizacion`
---
-ALTER TABLE `tecnico_cotizacion`
- ADD PRIMARY KEY (`id_tecnico_cotizacion`);
-
---
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
@@ -428,11 +409,6 @@ MODIFY `id_solicitud_analisis_lq` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT
 --
 ALTER TABLE `tecnico`
 MODIFY `id_tecnico` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `tecnico_cotizacion`
---
-ALTER TABLE `tecnico_cotizacion`
-MODIFY `id_tecnico_cotizacion` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

@@ -100,17 +100,34 @@
                   <?php if($this->session->id_rol == 1):?>
                   <li><a><i class="fa fa-home"></i> Administrador <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('administracion/empleado/index') ?>">Empleados</a></li>
-                      <li><a href="<?php echo site_url('administracion/usuario/index') ?>">Usuarios</a></li>
+                      <li><a href="<?php echo site_url('administracion/empleado/index') ?>">Registro de personal</a></li>
+                      <li><a href="<?php echo site_url('administracion/usuario/index') ?>">Registro de usuarios del sistema</a></li>
+                      <li><a href="<?php echo site_url('null') ?>">Cotizaciones</a></li>
+                      <li><a href="<?php echo site_url('null') ?>">Bloques de equipos</a></li>
                     </ul>
                   </li>                  
                   <?php endif;?>
                   <?php if($this->session->id_rol == 3):?>
                   <li><a><i class="fa fa-home"></i> Recepcionista <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url('recepcionista/cliente/index') ?>">Clientes</a></li>
+                      <li><a href="<?php echo site_url('recepcionista/cliente/index') ?>">Registro de Clientes</a></li>
                       <li><a href="<?php echo site_url('recepcionista/solicitud_analisis_lq/solicitudes') ?>">Lab. Químico</a></li>
-                      <li><a href="<?php echo site_url('recepcionista/solicitud_analisis_lm/solicitudes') ?>">Lab. Químico</a></li>
+                      <li><a href="<?php echo site_url('recepcionista/solicitud_analisis_lm/solicitudes') ?>">Lab. Metalúrgico</a></li>
+                    </ul>
+                  </li>                  
+                  <?php endif;?>
+                  <?php if($this->session->id_rol == 5):?>
+                  <li><a><i class="fa fa-home"></i> Encargado Lab. Químico <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo site_url('recepcionista/cliente/index') ?>">Solicitudes</a></li>
+                      <li><a href="<?php echo site_url('recepcionista/solicitud_analisis_lq/solicitudes') ?>">Informe Final</a></li>
+                    </ul>
+                  </li>                  
+                  <?php endif;?>
+                  <?php if($this->session->id_rol == 4):?>
+                  <li><a><i class="fa fa-home"></i> Técnico Lab. Químico <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo site_url('recepcionista/cliente/index') ?>">Asignaciones</a></li>
                     </ul>
                   </li>                  
                   <?php endif;?>

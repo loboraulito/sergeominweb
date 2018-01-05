@@ -40,10 +40,9 @@
                 <tr>
                   <th>Id</th>
                   <th>Nombre</th>
-                  <th>Apellido Paterno</th>
-                  <th>Apellido Materno</th>
-                  <th>Estado</th>
-                  <th>Fecha Creación</th>
+                  <th>CI</th>
+                  <th>Telefono</th>
+                  <th>Cargo</th>                  
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -163,20 +162,25 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_empleado"},
-      {"data":"nombre"},
-      {"data":"apellido_paterno"},
-      {"data":"apellido_materno"},
-      {"data":"estado"},
-      {"data":"fecha_creacion"},
+      {"data":"id_empleado",
+        searchable:false},
+      {"data":null,
+        "render":function(a,b,data,d){
+          return data.nombre+" "+data.apellido_paterno+" "+data.apellido_materno;
+        }},
+      {"data":"ci"},
+      {"data":"telefono",
+        searchable:false},
+      {"data":null},      
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){          
           if (data.estado == 'A') {
-                return "<button class='btn btn-primary btn-usuario'>Usuarios</button><button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-danger btn-borrar'>Borrar</button>";
+                return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-danger btn-borrar'>Borrar</button><button class='btn btn-info btn-imprimir'>Imprimir</button>";
             }
-            return "<button class='btn btn-warning btn-activar'>Activar</button>";
-        }
+            return "<button class='btn btn-warning btn-activar'>Activar</button><button class='btn btn-info btn-imprimir'>Imprimir</button>";
+        },
+        searchable:false
       }
     ]
 

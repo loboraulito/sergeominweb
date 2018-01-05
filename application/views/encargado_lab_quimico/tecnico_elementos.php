@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Solicitudes del Cliente</h2>
+            <h2>Técnicos Cotización</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>             
@@ -23,17 +23,16 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <h2>Lista de Solicitudes</h2> 
-            
+            <h2>Lista de Asignaciones</h2> 
+            <button class="btn btn-default btn-success" onclick="nuevo()">Nuevo</button>
             <?php //print_r($empleados);?>
             <table id="tabla" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Nro de Orden</th>
-                  <th>Hoja de Ruta</th>
-                  <th>Cantidad Muestras</th>
-                  <th>Tipo de Muestra</th>
-                  <th>Procedencia</th>
+                  <th>Id</th>
+                  <th>Técnico</th>
+                  <th>Cotización</th>
+                  <th>Solicitud</th>
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -54,7 +53,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="myModalLabel">Prueba Lab Quimico</h4>
+          <h4 class="modal-title" id="myModalLabel">Asignación Técnico</h4>
         </div>
         <div class="modal-body">
           <form id="form" class="form-horizontal" data-toggle="validator" role="form" >
@@ -104,7 +103,7 @@
           <h4 class="modal-title" id="myModalLabel">¿Borrar?</h4>
         </div>
         <div class="modal-body">
-          Esta seguro de Borrar el Empleado
+          Esta seguro de Borrar el Registro
         </div>
         <div class="modal-footer">
           <button id="confirmar-guardar-btn" type="button" class="btn btn-primary" >Si</button>
@@ -117,7 +116,7 @@
 </div>
 
 <script>
-var js_data = '<?php echo json_encode($solicitud_analisis_lqs); ?>';
+var js_data = '<?php echo json_encode($tecnico_cotizaciones); ?>';
 var js_obj_data = JSON.parse(js_data);
 var tabla;
 var a;
@@ -135,11 +134,10 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_solicitud_analisis_lq"},
-      {"data":"numero_hoja_ruta"},
-      {"data":"cantidad_muestras"},
-      {"data":"tipo_muestra"},
-      {"data":"procedencia"},
+      {"data":"id_tecnico_cotizacion"},
+      {"data":"id_tecnico"},
+      {"data":"id_cotizacion"},
+      {"data":"id_tecnico_cotizacion"},
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
@@ -153,12 +151,12 @@ $(function() {
   
   $('#tabla tbody').on( 'click','.btn-asignar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    location = "<?php echo site_url('encargado_lab_quimico/solicitud_analisis_lq/tecnico_elementos/') ?>"+data['id_solicitud_analisis_lq'];    
+    location = "<?php echo site_url('encargado_lab_quimico/solicitud_analisis_lq/tecnico_elementos/') ?>"+data['id_tecnico_cotizacion'];    
   } );
 
   $('#tabla tbody').on( 'click','.btn-imprimir', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
-    window.open( "<?php echo site_url('recepcionista/solicitud_analisis_lq/imprimir/') ?>"+data['id_solicitud_analisis_lq']);    
+    window.open( "<?php echo site_url('recepcionista/solicitud_analisis_lq/imprimir/') ?>"+data['id_tecnico_cotizacion']);    
   } );
 
   $('#fecha_entrega').datepicker({
@@ -167,12 +165,18 @@ $(function() {
     format: 'yyyy-mm-dd',
     startDate: '+0d'
   });
+
+  $(".chosen-select").chosen({
+    disable_search_threshold: 10,
+    no_results_text: "Oops, no se encontro nada!",
+    width: "95%"
+  });
 });
 
 function guardar_nuevo(){
   if(!$('#form').find('.has-error').length) {
     var datos=$('#form').serializeArray();   
-    //datos.push({name: 'id_cliente', value: <?php echo $id_cliente?>});
+    //datos.push({name: 'id_cliente', value: });
     $.ajax({
         type: "POST",
         url: '<?php echo site_url('recepcionista/solicitud_analisis_lq/nuevo');?>',

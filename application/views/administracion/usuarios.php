@@ -24,15 +24,17 @@
           </div>
           <div class="x_content">
             <h2>Lista de Usuarios</h2> 
-            <button class="btn btn-default btn-success" onclick="nuevo()">Nuevo</button>
+            
             <?php //print_r($empleados);?>
             <table id="tabla" class="table table-striped table-bordered table-hover">
               <thead>
                 <tr>
                   <th>Id</th>
+                  <th>Nombre</th>
+                  <th>CI</th>
+                  <th>Telefono</th>
                   <th>Usuario</th>
-                  <th>Rol</th>
-                  <th>Estado</th>
+                  <th>Rol</th>                  
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -69,6 +71,20 @@
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
+              </div>              
+              <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="clave">Rol</label>
+                <div class="input-group col-md-7">
+                  <select class="select2_single form-control" tabindex="-1" name="id_rol">
+                    <option></option>
+                    <?php foreach($roles as $rol):?>
+                      <option value="<?php echo $rol->id_rol;?>"><?php echo $rol->rol;?></option>
+                    <?php endforeach;?>
+                  </select>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
               </div>
               <!-- Text input-->
               <div class="form-group has-feedback">
@@ -85,15 +101,15 @@
               </div>
               <!-- Text input-->
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="clave">Rol</label>
+                <label class="col-md-4 control-label" for="clave1">Confirmar Clave</label>
                 <div class="input-group col-md-7">
-                  <select class="select2_single form-control" tabindex="-1" name="id_rol">
-                    <option></option>
-                    <?php foreach($roles as $rol):?>
-                      <option value="<?php echo $rol->id_rol;?>"><?php echo $rol->rol;?></option>
-                    <?php endforeach;?>
-                  </select>
-                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <input id="clave1" name="clave1"
+                    placeholder="Clave del usuario"
+                    class="form-control input-md" type="password"
+                    pattern="^[A-z0-9]{1,}$" required
+                    data-error="Campo Obligatorio solo letras y números"
+                    data-match="#clave" data-match-error="Las contraseñas deben ser iguales"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>                            
@@ -120,7 +136,7 @@
           <h4 class="modal-title" id="myModalLabel">¿Borrar?</h4>
         </div>
         <div class="modal-body">
-          Esta seguro de Borrar el Empleado
+          Esta seguro de Borrar el Usuario
         </div>
         <div class="modal-footer">
           <button id="confirmar-guardar-btn" type="button" class="btn btn-primary" >Si</button>
@@ -135,7 +151,6 @@
 <script>
 var js_data = '<?php echo json_encode($usuarios); ?>';
 var js_obj_data = JSON.parse(js_data);
-var id_empleado_var= <?php echo $id_empleado; ?>;
 var tabla;
 var a;
 
@@ -152,26 +167,36 @@ $(function() {
     },
     data: js_obj_data,
     "columns":[
-      {"data":"id_usuario"},
+      {"data":"id_empleado"},
+      {"data":null,
+        "render":function(a,b,data,d){
+          return data.nombre+" "+data.apellido_paterno+" "+data.apellido_materno;
+        }},
+      {"data":"ci"},
+      {"data":"telefono"},  
       {"data":"usuario"},
-      {"data":"rol"},
-      {"data":"ru_estado"},      
+      {"data":"rol"},     
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){          
           if (data.ru_estado) {
-                return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-danger btn-borrar'>Borrar</button>";
+                return "<button class='btn btn-info btn-asignar-rol-editar'>Asignar Rol</button><button class='btn btn-danger btn-borrar'>Borrar</button>";
             }
-            return "<button class='btn btn-warning btn-activar'>Activar</button>";
+            return "<button class='btn btn-info btn-asignar-rol-nuevo'>Asignar Rol</button>";
         }
       }
     ]
 
   } );
 
-  $('#tabla tbody').on( 'click','.btn-editar', function () {
+  $('#tabla tbody').on( 'click','.btn-asignar-rol-editar', function () {
     var data = tabla.row( $(this).parents('tr') ).data();
     editar( data['id_empleado']);     
+  } );
+
+  $('#tabla tbody').on( 'click','.btn-asignar-rol-nuevo', function () {
+    var data = tabla.row( $(this).parents('tr') ).data();
+    nuevo( data['id_empleado']);     
   } );
   
   $('#tabla tbody').on( 'click','.btn-borrar', function () {
@@ -185,10 +210,10 @@ $(function() {
   } );
 });
 
-function guardar_nuevo(){
+function guardar_nuevo(id_empleado){
   if(!$('#form').find('.has-error').length) {
     var datos=$('#form').serializeArray();
-    datos.push({name: 'id_empleado', value: id_empleado_var});
+    datos.push({name: 'id_empleado', value: id_empleado});
     $.ajax({
         type: "POST",
         url: '<?php echo site_url('administracion/usuario/nuevo');?>',
@@ -203,7 +228,7 @@ function guardar_editar(id){
   if(!$('#form').find('.has-error').length) {
       $.ajax({
             type: "POST",
-            url: '<?php echo site_url('administracion/empleado/editar/');?>'+id,
+            url: '<?php echo site_url('administracion/usuario/editar/');?>'+id,
             data: $('#form').serialize(),
             success: function(response){ $('#nuevo').modal('hide');location.reload();},
             error: function(){alert('Formulario con errores al editar');}
@@ -211,12 +236,12 @@ function guardar_editar(id){
   }   
 }
 
-function nuevo(){
+function nuevo($id_empleado){
   $('#form').resetear();
   $('#nuevo').appendTo("body").modal('show');
   $( "#guardar-btn").unbind( "click" );
   $( "#guardar-btn" ).bind( "click", function() {
-      guardar_nuevo();
+      guardar_nuevo($id_empleado);
   });
 }
 
@@ -228,10 +253,8 @@ function buscar(id) {
 
 function editar(id){
   $('#form').resetear();
-  datos = buscar(id)[0];
-  
-  populate_form(datos);
-  
+  datos = buscar(id)[0];  
+  populate_form(datos);  
   $('#nuevo').modal('show');
   $( "#guardar-btn").unbind( "click" );
   $( "#guardar-btn" ).bind( "click", function() {

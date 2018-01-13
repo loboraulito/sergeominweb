@@ -35,6 +35,20 @@ class Usuario extends CI_Controller {
 			redirect('login','refresh');
 		}
 	}
+
+	public function empleados()
+	{
+		if($this->session->userdata('id_rol')==1){
+			$data['contenido'] = 'administracion/usuarios'; 
+			$data['roles']=$this->rol_model->get_todos();
+			$data['usuario'] = $this->session->userdata('usuario');	  
+			$data['usuarios']=$this->usuario_model->get_empleado_usuarios();			
+			$datosCapsula['data']=$data;  
+			$this->load->view('template/template',$datosCapsula);
+		}else{
+			redirect('login','refresh');
+		}
+	}
 	
 	public function nuevo(){
 		$data = $this->input->post();
@@ -48,13 +62,14 @@ class Usuario extends CI_Controller {
 	}
 
 	public function editar($id){
-	    $data = array(	        
-	        'nombre'=>$this->input->post('nombre'),
-            'apellido_paterno'=>$this->input->post('apellido_paterno'),
-            'apellido_materno'=>$this->input->post('apellido_materno')     
-	    );
-	    
-	    $this->usuario_model->update($id,$data);
+	    $data = $this->input->post();		
+		$data_usuario['usuario'] = $data['usuario'];
+		$data_usuario['clave'] = md5($data['clave']);
+        $this->usuario_model->update($id,$data_usuario);
+        $usuarios = $this->usuario_model->get_usuarios_empleado($id);
+        $id_usuario = $usuarios[0]->id_usuario;        
+        $data_rol['id_rol'] = $data['id_rol'];
+        $this->roles_usuario_model->update($id_usuario,$data_rol);
 	}
     
     public function borrar($id){      

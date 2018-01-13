@@ -101,7 +101,7 @@
                   <li><a><i class="fa fa-home"></i> Administrador <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url('administracion/empleado/index') ?>">Registro de personal</a></li>
-                      <li><a href="<?php echo site_url('administracion/usuario/index') ?>">Registro de usuarios del sistema</a></li>
+                      <li><a href="<?php echo site_url('administracion/usuario/empleados') ?>">Registro de usuarios del sistema</a></li>
                       <li><a href="<?php echo site_url('null') ?>">Cotizaciones</a></li>
                       <li><a href="<?php echo site_url('null') ?>">Bloques de equipos</a></li>
                     </ul>

@@ -14,11 +14,19 @@ class Cliente_model extends CI_Model{
         $this->db->where('id_cliente', $id);
         $this->db->update('cliente', $data);        
     }
-
+    
     function delete($id)
-    {
-		$this->db->where('id_cliente', $id);
-		$this->db->delete('cliente');
+    {   
+        $data=array('estado'=>false);
+        $this->db->where('id_cliente', $id);
+        $this->db->update('cliente', $data); 
+    }
+
+    function activar($id)
+    {   
+        $data=array('estado'=>true);
+        $this->db->where('id_cliente', $id);
+        $this->db->update('cliente', $data); 
     }
     
     function get_todos(){

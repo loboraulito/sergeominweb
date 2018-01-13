@@ -215,55 +215,6 @@ $(function() {
   } );
 
   $('#fecha_entrega').datepicker(
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   {
     language: 'es',
     autoclose: true,

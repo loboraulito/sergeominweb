@@ -43,11 +43,7 @@ class Cliente extends CI_Controller {
 	}
 
 	public function editar($id){
-	    $data = array(	        
-	        'nombre'=>$this->input->post('nombre'),
-            'apellido_paterno'=>$this->input->post('apellido_paterno'),
-            'apellido_materno'=>$this->input->post('apellido_materno')     
-	    );
+	    $data = $this->input->post();
 	    
 	    $this->cliente_model->update($id,$data);
 	}

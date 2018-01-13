@@ -11,7 +11,7 @@ class roles_usuarioes_usuario_model extends CI_Model{
 
     function update($id, $data)
     {
-        $this->db->where('id_roles_usuario', $id);
+        $this->db->where('id_usuario', $id);
         $this->db->update('roles_usuario', $data);        
     }
 

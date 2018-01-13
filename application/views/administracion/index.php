@@ -107,12 +107,282 @@
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
-              </div>              
+              </div>
+
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="ci">ci</label>
+                <div class="input-group col-md-7">
+                  <input id="ci" name="ci"
+                    placeholder="ci"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9A-z\s\-]{1,}$"
+                    data-remote="<?php echo site_url('administracion/empleado/verificar_ci/0');?>"
+                    data-pattern-error="Campo Obligatorio solo números, letras, guión y espacios" data-remote-error="El CI debe ser único"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>  
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Telefono</label>
+                <div class="input-group col-md-7">
+                  <input id="telefono" name="telefono"
+                    placeholder="telefono"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9\s]{1,}$"
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Celular</label>
+                <div class="input-group col-md-7">
+                  <input id="celular" name="celular"
+                    placeholder="celular"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9\s]{1,}$"
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Dirección</label>
+                <div class="input-group col-md-7">
+                  <input id="direccion" name="direccion"
+                    placeholder="direccion"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9A-Za-z\s]{1,}$"
+                    data-error="Campo Obligatorio letras, números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Email</label>
+                <div class="input-group col-md-7">
+                  <input id="email" name="email"
+                    placeholder="email"
+                    class="form-control input-md" type="email"                    
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Lugar de Nacimiento</label>
+                <div class="input-group col-md-7">
+                  <input id="lugar_nacimiento" name="lugar_nacimiento"
+                    placeholder="lugar_nacimiento"
+                    class="form-control input-md" type="text"
+                    pattern="^[A-zñÑáéíóúÁÉÍÓÚ\s]{1,}$"
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Fecha de Nacimiento</label>
+                <div class="input-group col-md-7">
+                  <input id="fecha_nacimiento" name="fecha_nacimiento"
+                    placeholder="fecha_nacimiento"
+                    class="form-control input-md" type="date"                    
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true" required></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Fecha Ingreso</label>
+                <div class="input-group col-md-7">
+                  <input id="fecha_ingreso" name="fecha_ingreso"
+                    placeholder="fecha_ingreso"
+                    class="form-control input-md" type="date"                    
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>                
             </fieldset>
           </form>
         </div>
         <div class="modal-footer">
           <button id="guardar-btn" type="button" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+<!--Formularios para nuevo editar y confirmar borrado-->
+<div class="modal fade" id="nuevo1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
+    <div class="modal-dialog " >
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">Empleados</h4>
+        </div>
+        <div class="modal-body">
+          <form id="form1" class="form-horizontal" data-toggle="validator" role="form" >
+            <fieldset>
+
+              <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="nombre">Nombres</label>
+                <div class="input-group col-md-7">
+                  <input id="nombre" name="nombre"
+                    placeholder="Nombre del Empleado"
+                    class="form-control input-md" type="text"
+                    pattern="^[A-z\s]{1,}$" required
+                    data-error="Campo Obligatorio solo letras y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_paterno">Apellido Paterno</label>
+                <div class="input-group col-md-7">
+                  <input id="apellido_paterno" name="apellido_paterno"
+                    placeholder="Apellidos del Empleado"
+                    class="form-control input-md" type="text"
+                    pattern="^[A-z\s]{1,}$" required
+                    data-error="Campo Obligatorio solo letras y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Apellido Materno</label>
+                <div class="input-group col-md-7">
+                  <input id="apellido_materno" name="apellido_materno"
+                    placeholder="Apellidos del Empleado"
+                    class="form-control input-md" type="text"
+                    pattern="^[A-z\s]{1,}$"
+                    data-error="Campo Obligatorio solo letras y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="ci">ci</label>
+                <div class="input-group col-md-7">
+                  <input id="ci" name="ci"
+                    placeholder="ci"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9A-z\s\-]{1,}$"
+                    data-remote="<?php echo site_url('administracion/empleado/verificar_ci/1');?>"
+                    data-pattern-error="Campo Obligatorio solo números, letras, guión y espacios" data-remote-error="El CI debe ser único"> 
+                    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>  
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Telefono</label>
+                <div class="input-group col-md-7">
+                  <input id="telefono" name="telefono"
+                    placeholder="telefono"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9\s]{1,}$"
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Celular</label>
+                <div class="input-group col-md-7">
+                  <input id="celular" name="celular"
+                    placeholder="celular"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9\s]{1,}$"
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Dirección</label>
+                <div class="input-group col-md-7">
+                  <input id="direccion" name="direccion"
+                    placeholder="direccion"
+                    class="form-control input-md" type="text"
+                    pattern="^[0-9A-Za-z\s]{1,}$"
+                    data-error="Campo Obligatorio letras, números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Email</label>
+                <div class="input-group col-md-7">
+                  <input id="email" name="email"
+                    placeholder="email"
+                    class="form-control input-md" type="email"                    
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Lugar de Nacimiento</label>
+                <div class="input-group col-md-7">
+                  <input id="lugar_nacimiento" name="lugar_nacimiento"
+                    placeholder="lugar_nacimiento"
+                    class="form-control input-md" type="text"
+                    pattern="^[A-zñÑáéíóúÁÉÍÓÚ\s]{1,}$"
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Fecha de Nacimiento</label>
+                <div class="input-group col-md-7">
+                  <input id="fecha_nacimiento" name="fecha_nacimiento"
+                    placeholder="fecha_nacimiento"
+                    class="form-control input-md" type="date"                    
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true" required></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+               <!-- Text input-->
+              <div class="form-group has-feedback">
+                <label class="col-md-4 control-label" for="apellido_materno">Fecha Ingreso</label>
+                <div class="input-group col-md-7">
+                  <input id="fecha_ingreso" name="fecha_ingreso"
+                    placeholder="fecha_ingreso"
+                    class="form-control input-md" type="date"                    
+                    data-error="Campo Obligatorio solo números y espacios"> <span
+                    class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>                
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button id="guardar-btn-editar" type="button" class="btn btn-primary">Guardar</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
@@ -205,6 +475,11 @@ $(function() {
     var data = tabla.row( $(this).parents('tr') ).data();
     activar( data['id_empleado']);     
   } );
+
+  $('#tabla tbody').on( 'click','.btn-imprimir', function () {
+    var data = tabla.row( $(this).parents('tr') ).data();
+    window.open( "<?php echo site_url('administracion/empleado/imprimir/') ?>"+data['id_empleado']);    
+  } );
 });
 
 function guardar_nuevo(){
@@ -220,12 +495,12 @@ function guardar_nuevo(){
 }
 
 function guardar_editar(id){
-  if(!$('#form').find('.has-error').length) {
+  if(!$('#form1').find('.has-error').length) {
       $.ajax({
             type: "POST",
             url: '<?php echo site_url('administracion/empleado/editar/');?>'+id,
-            data: $('#form').serialize(),
-            success: function(response){ $('#nuevo').modal('hide');location.reload();},
+            data: $('#form1').serialize(),
+            success: function(response){ $('#nuevo1').modal('hide');location.reload();},
             error: function(){alert('Formulario con errores al editar');}
         });
   }   
@@ -247,14 +522,14 @@ function buscar(id) {
   } 
 
 function editar(id){
-  $('#form').resetear();
+  $('#form1').resetear();
   datos = buscar(id)[0];
   
   populate_form(datos);
   
-  $('#nuevo').modal('show');
-  $( "#guardar-btn").unbind( "click" );
-  $( "#guardar-btn" ).bind( "click", function() {
+  $('#nuevo1').modal('show');
+  $( "#guardar-btn-editar").unbind( "click" );
+  $( "#guardar-btn-editar" ).bind( "click", function() {
       guardar_editar(id);
   });
 }
@@ -284,6 +559,8 @@ function activar(id){
         error: function(){alert('Formulario con errores al Activar');}
     });
 }
+
+
 
 function populate_form(datos){
   //console.log(datos[0]);

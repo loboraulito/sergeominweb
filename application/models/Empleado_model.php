@@ -34,4 +34,14 @@ class Empleado_model extends CI_Model {
             return $query->result();
     }       
 
+    function get($id)
+    {           
+        $query = $this->db->query('SELECT * FROM empleado WHERE id_empleado = ?',array($id));
+        return $query->row();
+    }
+
+    function get_buscar_ci($ci){
+        $query = $this->db->query('SELECT * FROM empleado WHERE ci = ?',array($ci));
+        return $query->row();
+    }
 }

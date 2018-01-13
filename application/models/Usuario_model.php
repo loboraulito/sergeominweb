@@ -13,7 +13,7 @@ class Usuario_model extends CI_Model{
 
     function update($id, $data)
     {
-        $this->db->where('id_usuario', $id);
+        $this->db->where('id_empleado', $id);
         $this->db->update('usuario', $data);        
     }
 
@@ -34,6 +34,17 @@ class Usuario_model extends CI_Model{
             from usuario u
             join roles_usuario ru on (u.id_usuario = ru.id_usuario)
             join rol r on (r.id_rol = ru.id_rol) where id_empleado =?',array($id_empleado)
+        );
+        return $query->result();
+    }
+
+    function get_empleado_usuarios(){
+        $query = $this->db->query(
+            'SELECT u.id_usuario, u.usuario,u.id_empleado,u.estado as u_estado,r.id_rol, ru.estado as ru_estado,r.rol, e.* 
+            from empleado e
+            left join usuario u on (e.id_empleado = u.id_empleado)
+            left join roles_usuario ru on (u.id_usuario = ru.id_usuario)
+            left join rol r on (r.id_rol = ru.id_rol)'
         );
         return $query->result();
     }

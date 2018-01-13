@@ -65,7 +65,7 @@
                   <input id="nombre_empresa" name="nombre_empresa"
                     placeholder="Nombre de Empresa"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
+                    pattern="^[A-z0-9\-.ñÑáéíóúÁÉÍÓÚ\s]{1,}$" required
                     data-error="Campo Obligatorio solo letras y números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
@@ -77,7 +77,7 @@
                   <input id="numero_ci" name="numero_ci"
                     placeholder="numero_ci"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z0-9]{1,}$" required
+                    pattern="^[A-z0-9\-]{1,}$" required
                     data-error="Campo Obligatorio solo letras y números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
@@ -89,8 +89,8 @@
                   <input id="nombre_responsable" name="nombre_responsable"
                     placeholder="nombre_responsable"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
+                    pattern="^[A-z\s]{1,}$" required
+                    data-error="Campo Obligatorio solo letras"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
@@ -101,8 +101,8 @@
                   <input id="nit" name="nit"
                     placeholder="nit"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z0-9]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
+                    pattern="^[0-9]{1,}$" required
+                    data-error="Campo Obligatorio solo números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
@@ -113,20 +113,20 @@
                   <input id="direccion" name="direccion"
                     placeholder="Nombre de direccion"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z\s]{1,}$" required
+                    pattern="^[A-z0-9\-.ñÑáéíóúÁÉÍÓÚ#\s]{1,}$" required
                     data-error="Campo Obligatorio solo letras y números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="numero_celular">Numero de Celular</label>
+                <label class="col-md-4 control-label" for="numero_celular">Número de Celular</label>
                 <div class="input-group col-md-7">
                   <input id="numero_celular" name="numero_celular"
                     placeholder="numero_celular"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
+                    pattern="^[0-9]{1,}$" required
+                    data-error="Campo Obligatorio solo números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
@@ -137,20 +137,20 @@
                   <input id="numero_telefono" name="numero_telefono"
                     placeholder="numero_telefono"
                     class="form-control input-md" type="text"
-                    pattern="^[A-z]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
+                    pattern="^[0-9]{1,}$" required
+                    data-error="Campo Obligatorio solo números"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
               </div>
               <div class="form-group has-feedback">
-                <label class="col-md-4 control-label" for="departamento">departamento</label>
+                <label class="col-md-4 control-label" for="departamento">Departamento</label>
                 <div class="input-group col-md-7">
                   <input id="departamento" name="departamento"
                     placeholder="departamento"
                     class="form-control input-md" type="text"
                     pattern="^[A-z\s]{1,}$" required
-                    data-error="Campo Obligatorio solo letras y números"> <span
+                    data-error="Campo Obligatorio solo letras"> <span
                     class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
@@ -190,7 +190,7 @@
           <h4 class="modal-title" id="myModalLabel">¿Borrar?</h4>
         </div>
         <div class="modal-body">
-          Esta seguro de Borrar el Empleado
+          Esta seguro de Borrar el Cliente
         </div>
         <div class="modal-footer">
           <button id="confirmar-guardar-btn" type="button" class="btn btn-primary" >Si</button>
@@ -229,7 +229,12 @@ $(function() {
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
-          return "<button class='btn btn-primary btn-editar'>Editar</button><button class='btn btn-success btn-solicitud'>Solicitudes</button>";
+          if (data.estado == true) {
+            return "<button class='btn btn-primary btn-editar'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button><button class='btn btn-danger btn-borrar'><i class='fa fa-trash-o' aria-hidden='true'></i>&nbsp;Eliminar</button><button class='btn btn-info btn-imprimir'><i class='fa fa-print' aria-hidden='true'></i> Imprimir</button>";
+          }
+          else{
+            return "<button class='btn btn-primary btn-editar'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</button><button class='btn btn-warning btn-activar'><i class='fa fa-trash-o' aria-hidden='true'></i>&nbsp;Activar</button><button class='btn btn-info btn-imprimir'><i class='fa fa-print' aria-hidden='true'></i> Imprimir</button>";
+          }
         }
       }
     ]
@@ -321,7 +326,7 @@ function borrar(id){
 function activar(id){  
   $.ajax({
         type: "POST",
-        url: '<?php echo site_url('administracion/empleado/activar/');?>'+id,        
+        url: '<?php echo site_url('recepcionista/cliente/activar/');?>'+id,        
         success: function(response){ location.reload();},
         error: function(){alert('Formulario con errores al Activar');}
     });
@@ -330,7 +335,7 @@ function activar(id){
 function guardar_borrar(id){
   $.ajax({
         type: "POST",
-        url: '<?php echo site_url('administracion/empleado/borrar/');?>'+id,        
+        url: '<?php echo site_url('recepcionista/cliente/borrar/');?>'+id,        
         success: function(response){ $('#confirmar').modal('hide');location.reload();},
         error: function(){alert('Formulario con errores al Borrar');}
     });   

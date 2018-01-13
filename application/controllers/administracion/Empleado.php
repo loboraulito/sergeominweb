@@ -37,20 +37,20 @@ class Empleado extends CI_Controller {
 	}
 	
 	public function nuevo(){
-        $data = array(
+        /*$data = array(
                 'nombre'=>$this->input->post('nombre'),
                 'apellido_paterno'=>$this->input->post('apellido_paterno'),
                 'apellido_materno'=>$this->input->post('apellido_materno')              
             );
+        $this->empleado_model->insert($data);*/
+
+        $data = $this->input->post();
+		//$data['id_usuario'] = $this->session->id_usuario;    
         $this->empleado_model->insert($data);
 	}
 
 	public function editar($id){
-	    $data = array(	        
-	        'nombre'=>$this->input->post('nombre'),
-            'apellido_paterno'=>$this->input->post('apellido_paterno'),
-            'apellido_materno'=>$this->input->post('apellido_materno')     
-	    );
+	    $data = $this->input->post();
 	    
 	    $this->empleado_model->update($id,$data);
 	}
@@ -65,11 +65,23 @@ class Empleado extends CI_Controller {
         $this->empleado_model->activar($id);
     }
 
-    public function imprimir(){
+    public function verificar_ci($estado){
 
+      $ci = $this->input->get('ci');
+      $existe = $this->empleado_model->get_buscar_ci($ci);
+       
+      if((!$existe && $estado!=1) || ($estado==1 && $existe->ci==$ci)) {
+          $this->output->set_status_header('200');
+      }
+      else $this->output->set_status_header('404');
+    }
+
+    public function imprimir($id_empleado){
+
+        $empleado = $this->empleado_model->get($id_empleado);
 
         $this->load->library('Pdf');
-        $pdf = new Pdf('I', 'mm', 'usletter', true, 'UTF-8', false); // 'I'' es para horizon;a pagina horizontal 'P' vertical
+        $pdf = new Pdf('P', 'mm', 'usletter', true, 'UTF-8', false); // 'I'' es para horizon;a pagina horizontal 'P' vertical
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('Viviana');
@@ -149,170 +161,59 @@ class Empleado extends CI_Controller {
 		$nro = 1; 
 
         $texto='';
-        foreach ($pruebas as $prueba){
-            $texto=$texto.'<tr>   
-	        <td class="tg-yw4l">'.$nro++.'</td>
-            <td class="tg-yw4l" colspan="2">'.$prueba->codigo_muestra_cliente.'</td>
-            <td class="tg-yw4l" colspan="2">'.$prueba->elementos.'</td>
-            <td class="tg-yw4l">'.$prueba->id_prueba_lab_quimico.'</td>            
-		</tr>';
-        }     
-
-
-        $nro1 = 1; 
-        $total = 0;
-
-        $texto1='';
-
-        foreach ($cotizaciones as $cotizacion){
-        	$total = $total + ($cotizacion->cantidad*$cotizacion->precio_unitario);
-            $texto1=$texto1.'<tr>   
-	        <td class="tg-yw4l">'.$nro1++.'</td>
-            <td class="tg-yw4l">'.$cotizacion->elemento.'</td>
-            <td class="tg-yw4l" align="right">'.$cotizacion->cantidad.'</td>
-            <td class="tg-yw4l" align="right">'.$cotizacion->precio_unitario.'</td>
-            <td class="tg-yw4l" align="right">'.number_format(($cotizacion->cantidad*$cotizacion->precio_unitario), 2, ',', '.').'</td>
-            <td class="tg-yw4l"></td>          
-		</tr>';
-        }        
-   		
-   		$total_impr = number_format($total, 2, ',', '.');
-
+        
+        $resul = print_r($empleado);  
         $html = <<<EOD
 
 
 <table class="tg" border="1" cellspacing="0" cellpadding="2">
   <tr>
-    <td class="tg-yw4l" width="30"></td>
-    <td class="tg-yw4l" width="90"></td>
-    <td class="tg-yw4l" width="150"></td>
-    <td class="tg-yw4l" width="150"></td>
-    <td class="tg-yw4l" width="90"></td>
-    <td class="tg-yw4l" width="120"></td>
+    <td class="tg-yw4l" width="100"></td>
+    <td class="tg-yw4l" width="300"></td>    
   </tr>	
   <tr>
-    <th class="tg-031e" colspan="6" align="center"><h2>FORMULARIO DE INGRESO DE MUESTRAS QMC <strong>Nro. $solicitud->id_solicitud_analisis_lq</strong></h2></th>
+    <th class="tg-031e" colspan="2" align="center"><h2>DATOS DE EMPLEADO</h2></th>
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"></td>
-    <td class="tg-yw4l" colspan="4" align="center">
-    	<h4>SERVICIO NACIONAL DE GEOLOGÍA Y TECNICO DE MINAS</h4>
-		<h4>"SERGEOTECMIN"</h4>
-		<h4>DEPARTAMENTO DE MINERIA Y METALURGIA</h4>
-		<h4>ORURO - BOLIVIA</h4>
-    </td>
+    <td class="tg-031e" align="right"><strong>Nombre:</strong></td>
+    <td class="tg-031e" align="left">$empleado->nombre</td>
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="6"><strong>Datos del cliente o empresa</strong></td>
+    <td class="tg-031e" align="right"><strong>Apellido Paterno:</strong></td>
+    <td class="tg-031e" align="left">$empleado->apellido_paterno</td>
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Empresa o Proyecto:</strong></td>
-    <td class="tg-yw4l" colspan="2">$cliente->nombre_empresa</td>
-    <td class="tg-yw4l" colspan="2"><strong>NIT:</strong>$cliente->nit</td>
+    <td class="tg-031e" align="right"><strong>Apellido Materno:</strong></td>
+    <td class="tg-031e" align="left">$empleado->apellido_materno</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Responsable:</strong></td>
-    <td class="tg-yw4l" colspan="4">$cliente->nombre_responsable</td>
+    <td class="tg-031e" align="right"><strong>CI:</strong></td>
+    <td class="tg-031e" align="left">$empleado->ci</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Dirección del resp:</strong></td>
-    <td class="tg-yw4l" colspan="4">$cliente->direccion</td>
+    <td class="tg-031e" align="right"><strong>Fecha Nacimiento:</strong></td>
+    <td class="tg-031e" align="left">$empleado->fecha_nacimiento</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Departamento:</strong></td>
-    <td class="tg-yw4l" colspan="4">$cliente->departamento</td>
+    <td class="tg-031e" align="right"><strong>Lugar de Nacimiento:</strong></td>
+    <td class="tg-031e" align="left">$empleado->lugar_nacimiento</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Telefonos:</strong></td>
-    <td class="tg-yw4l" colspan="4">$cliente->numero_telefono $cliente->numero_celular</td>
+    <td class="tg-031e" align="right"><strong>Dirección:</strong></td>
+    <td class="tg-031e" align="left">$empleado->direccion</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Correo Electrónico:</strong></td>
-    <td class="tg-yw4l" colspan="4">$cliente->email</td>
+    <td class="tg-031e" align="right"><strong>Celular:</strong></td>
+    <td class="tg-031e" align="left">$empleado->celular</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="6"><strong>Datos de la Muestra</strong></td>
+    <td class="tg-031e" align="right"><strong>Telefono:</strong></td>
+    <td class="tg-031e" align="left">$empleado->telefono</td>    
   </tr>
   <tr>
-    <td class="tg-yw4l" colspan="2" rowspan="2"><strong>Nro. de Orden:</strong></td>
-    <td class="tg-yw4l" rowspan="2"><h1><strong>$solicitud->id_solicitud_analisis_lq</strong></h1></td>
-    <td class="tg-yw4l"><strong>Fecha de Recepción:</strong></td>
-    <td class="tg-yw4l" colspan="2">$solicitud->fecha_recepcion</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"><strong>Hoja de ruta:</strong></td>
-    <td class="tg-yw4l" colspan="2"><strong>$solicitud->numero_hoja_ruta</strong></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Cant. de Muestras:</strong></td>
-    <td class="tg-yw4l">$solicitud->cantidad_pruebas</td>
-    <td class="tg-yw4l"><strong>Fecha de Entrega:</strong></td>
-    <td class="tg-yw4l" colspan="2">$solicitud->fecha_entrega</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Tipo de Muestra:</strong></td>
-    <td class="tg-yw4l" colspan="4">$solicitud->tipo_muestra</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="2"><strong>Procedencia:</strong></td>
-    <td class="tg-yw4l" colspan="4">$solicitud->procedencia</td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="6"><strong>Analisis por:</strong></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l"><strong>Nro.</strong></td>
-    <td class="tg-yw4l" colspan="2"><strong>Código</strong></td>
-    <td class="tg-yw4l" colspan="2"><strong>Elemento(s)</strong></td>
-    <td class="tg-yw4l"><strong>Nro. de Análisis:</strong></td>
-  </tr>
-  $texto
-  <tr>
-    <td class="tg-yw4l" colspan="6"><strong>Observaciones:</strong></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="6"><strong>Costos:</strong></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" ><strong>Nro.</strong></td>
-    <td class="tg-yw4l" ><strong>Detalle</strong></td>
-    <td class="tg-yw4l" ><strong>Nro. Muestras</strong></td>
-    <td class="tg-yw4l" ><strong>P. Unit. Bs.</strong></td>
-    <td class="tg-yw4l" ><strong>P. Total Bs.</strong></td>
-    <td class="tg-yw4l" ><strong>Observaciones</strong></td>
-  </tr>
-  $texto1
-  <tr>
-    <td class="tg-yw4l" colspan="4"><strong>Pulverización, por muestras:</strong></td>
-    <td class="tg-yw4l" align="right">0,00</td>
-    <td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="4"><strong>preparación de muestras: (trituración, molienda)</strong></td>
-    <td class="tg-yw4l" align="right">0,00</td>
-    <td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-    <td class="tg-yw4l" colspan="4"><strong>Precio Total (incluye impuestos de ley):</strong></td>
-    <td class="tg-yw4l" align="right"><h2>$total_impr</h2></td>
-    <td class="tg-yw4l"></td>
+    <td class="tg-031e" align="right"><strong>Email:</strong></td>
+    <td class="tg-031e" align="left">$empleado->email</td>    
   </tr>  
-  <tr>
-  	<td class="tg-yw4l"></td>
-    <td class="tg-yw4l" colspan="2" rowspan="3"></td>
-    <td class="tg-yw4l" colspan="3" rowspan="3"></td>
-  </tr>
-  <tr>
-  	<td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-  	<td class="tg-yw4l"></td>
-  </tr>
-  <tr>
-  	<td class="tg-yw4l"></td>
-    <td class="tg-yw4l" colspan="2"><strong>Firma del Responsable</strong></td>
-    <td class="tg-yw4l" colspan="3"><strong>Firma Recepcionista</strong></td>
-  </tr>
 </table>
 EOD;
         

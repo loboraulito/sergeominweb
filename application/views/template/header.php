@@ -30,6 +30,8 @@
     <!-- Custom Theme Style -->
     <link href="/sergeominweb/public/build/css/custom.min.css" rel="stylesheet">
 
+    <link href="/sergeominweb/public/vendors/fuelux/css/fuelux.min.css" rel="stylesheet">
+    
 
     <!-- jQuery -->
     <script src="/sergeominweb/public/vendors/jquery/dist/jquery.min.js"></script>
@@ -63,6 +65,7 @@
     <script src="/sergeominweb/public/vendors/bootstrap-datetimepicker/build/js/bootstrap-datepicker.min.js"></script>
     <script src="/sergeominweb/public/vendors/bootstrap-datetimepicker/build/js/bootstrap-datepicker.es.min.js"></script>
     <script src="/sergeominweb/public/vendors/choosen/chosen.jquery.min.js"></script>
+    <script src="/sergeominweb/public/vendors/jquery.bootstrap.wizard.js"></script>
     
   </head>
 

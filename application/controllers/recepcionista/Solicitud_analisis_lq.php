@@ -36,6 +36,29 @@ class Solicitud_analisis_lq extends CI_Controller {
 			redirect('login','refresh');
 		}
 	}
+
+  public function wizard_solicitud(){
+    if($this->session->userdata('id_rol')==3){
+      $data['contenido'] = 'recepcionista/wizard_solicitud'; 
+      $data['usuario'] = $this->session->userdata('usuario');
+      $datosCapsula['data']=$data;  
+      $this->load->view('template/template',$datosCapsula);
+    }else{
+      redirect('login','refresh');
+    }
+  }
+
+  public function solicitudes(){
+    if($this->session->userdata('id_rol')==3){
+      $data['contenido'] = 'recepcionista/solicitud_analisis_lq'; 
+      $data['usuario'] = $this->session->userdata('usuario');   
+      $data['solicitud_analisis_lqs']=$this->solicitud_analisis_lq_model->get_todos_con_clientes();        
+      $datosCapsula['data']=$data;  
+      $this->load->view('template/template',$datosCapsula);      
+    }else{
+      redirect('login','refresh');
+    }   
+  }
 	
 	public function nuevo(){   
 		$data = $this->input->post();

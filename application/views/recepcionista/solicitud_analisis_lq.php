@@ -13,7 +13,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Solicitudes del Cliente</h2>
+            <h2>Solicitudes Laboratorio Químico</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>             
@@ -33,7 +33,9 @@
                   <th>Hoja de Ruta</th>
                   <th>Cantidad Muestras</th>
                   <th>Tipo de Muestra</th>
-                  <th>Procedencia</th>
+                  <th>Procedencia</th>                  
+                  <th>Nombre de Empresa</th>
+                  <th>CI</th>
                   <th>Opciones</th>
                 </tr> 
               </thead>           
@@ -129,6 +131,51 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="modal fade" id="wizard" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="titulo">¿Borrar?</h4>
+        </div>
+        <div class="modal-body">
+          <div id="wizard_solicitud">
+            <div class="container">
+              <div id="my-wizard" class="wizard">
+                  <ul class="steps">
+                      <li data-target="#step1" class="active"><span class="badge badge-info">1</span>Step 1<span class="chevron"></span></li>
+                      <li data-target="#step2"><span class="badge">2</span>Step 2<span class="chevron"></span></li>
+                      <li data-target="#step3"><span class="badge">3</span>Step 3<span class="chevron"></span></li>
+                      <li data-target="#step4"><span class="badge">4</span>Step 4<span class="chevron"></span></li>
+                      <li data-target="#step5"><span class="badge">5</span>Step 5<span class="chevron"></span></li>
+                  </ul>
+                  <div class="actions">
+                      <button class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
+                      <button class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+                  </div>
+              </div>
+              <div class="step-content">
+                  <div class="step-pane active" id="step1">
+                      step1
+                  </div>
+                  <div class="step-pane" id="step2">
+                      step2
+                  </div>
+                  <div class="step-pane" id="step3">
+                      step3
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+    </div>
   </div>  
 
 <div class="modal fade" id="confirmar" tabindex="-1" role="dialog"
@@ -179,6 +226,8 @@ $(function() {
       {"data":"cantidad_muestras"},
       {"data":"tipo_muestra"},
       {"data":"procedencia"},
+      {"data":"nombre_empresa"},
+      {"data":"numero_ci"},
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
@@ -221,12 +270,30 @@ $(function() {
     format: 'yyyy-mm-dd',
     startDate: '+0d'
   });
+
+  $('#my-wizard').on('change', function(e, data) {
+                console.log('change');
+                if(data.step===3 && data.direction==='next') {
+                    // return e.preventDefault();
+                }
+            });
+            $('#my-wizard').on('changed', function(e, data) {
+                console.log('changed');
+            });
+            $('#my-wizard').on('finished', function(e, data) {
+                console.log('finished');
+            });
+            $('.btn-prev').on('click', function() {
+                console.log('prev');
+            });
+            $('.btn-next').on('click', function() {
+                console.log('next');
+            });
 });
 
 function guardar_nuevo(){
   if(!$('#form').find('.has-error').length) {
-    var datos=$('#form').serializeArray();   
-    datos.push({name: 'id_cliente', value: <?php echo $id_cliente?>});
+    var datos=$('#form').serializeArray();       
     $.ajax({
         type: "POST",
         url: '<?php echo site_url('recepcionista/solicitud_analisis_lq/nuevo');?>',
@@ -251,11 +318,7 @@ function guardar_editar(id){
 
 function nuevo(){
   $('#form').resetear();
-  $('#nuevo').appendTo("body").modal('show');
-  $( "#guardar-btn").unbind( "click" );
-  $( "#guardar-btn" ).bind( "click", function() {
-      guardar_nuevo();
-  });
+  $('#wizard').appendTo("body").modal('show');  
 }
 
 function buscar(id) {

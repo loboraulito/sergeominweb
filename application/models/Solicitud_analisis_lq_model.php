@@ -26,6 +26,15 @@ class Solicitud_analisis_lq_model extends CI_Model{
         return $query->result();
     }
 
+    function get_todos_con_clientes(){
+        $query = $this->db->query('
+                SELECT s.*, c.nit, c.nombre_empresa,c.numero_ci 
+                FROM solicitud_analisis_lq s
+                join cliente c on (s.id_cliente = c.id_cliente)
+            ');
+        return $query->result();
+    }
+
     function get_por_id_cliente($id_cliente){
         $query = $this->db->query('SELECT * FROM solicitud_analisis_lq WHERE id_cliente = ?',array($id_cliente));
         return $query->result();

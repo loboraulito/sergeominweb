@@ -92,9 +92,9 @@ class Solicitud_analisis_lq extends CI_Controller {
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('UTO');
-        $pdf->SetTitle('Universidad Técnica de Oruro');
-        $pdf->SetSubject('SisCat.UTO');
-        $pdf->SetKeywords('uto');
+        $pdf->SetTitle('SergeominWeb');
+        $pdf->SetSubject('SergeominWeb');
+        $pdf->SetKeywords('SergeominWeb');
         
         // set default header data
         $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'SERGEOMIN', 'SergeominWeb', array(

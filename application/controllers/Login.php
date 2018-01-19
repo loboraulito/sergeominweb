@@ -55,6 +55,8 @@ class Login extends CI_Controller {
 	    	redirect('recepcionista/cliente','refresh');
 	    }else if($this->session->userdata('id_rol')==5){
 	    	redirect('encargado_lab_quimico/solicitud_analisis_lq','refresh');
+	    }else if($this->session->userdata('id_rol')==4){
+	    	redirect('labquimico/tecnico_lab_quimico/asignaciones','refresh');
 	    }else{
 	    	echo 'error';
 	    	print_r($this->session);

@@ -143,7 +143,7 @@ $(function() {
       {"targets": -1,
         "data": null,        
         "render":function(a,b,data,d){
-          return "<button class='btn btn-primary btn-asignar'>Asignar Técnicos</button>";
+          return "<button class='btn btn-primary btn-asignar'>Asignar Técnicos</button><button class='btn btn-success btn-imprimir'>Imprimir Ensayos</button>";
         }
       }
     ]

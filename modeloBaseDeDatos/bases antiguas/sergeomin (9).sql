@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-01-2018 a las 11:48:16
+-- Tiempo de generación: 14-01-2018 a las 00:13:19
 -- Versión del servidor: 5.5.39
 -- Versión de PHP: 5.4.31
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   `lugar_nacimiento` varchar(50) NOT NULL,
   `fecha_nacimiento` date NOT NULL,
   `fecha_ingreso` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `empleado`
@@ -116,13 +116,12 @@ CREATE TABLE IF NOT EXISTS `empleado` (
 
 INSERT INTO `empleado` (`id_empleado`, `nombre`, `apellido_paterno`, `apellido_materno`, `ci`, `estado`, `fecha_creacion`, `telefono`, `celular`, `direccion`, `email`, `lugar_nacimiento`, `fecha_nacimiento`, `fecha_ingreso`) VALUES
 (1, 'Marina', 'Robles', 'Baltazar', '1112223', 'A', '0000-00-00 00:00:00', '72411111', '', '', '', '', '0000-00-00', '0000-00-00'),
-(2, 'Juan Carlos', 'Lopez', 'Mamani', '2223334', 'A', '0000-00-00 00:00:00', '72411112', '', '', '', '', '0000-00-00', '0000-00-00'),
+(2, 'Juan Carlos', 'Lopez', 'Mamani', '2223334', 'I', '0000-00-00 00:00:00', '72411112', '', '', '', '', '0000-00-00', '0000-00-00'),
 (3, 'Gladys', 'Villca', 'Chavez', '3334445', 'A', '0000-00-00 00:00:00', '72411113', '', '', '', '', '0000-00-00', '0000-00-00'),
 (4, 'Prueba', 'Emplead', '', '4445556', 'A', '0000-00-00 00:00:00', '72411114', '', '', '', '', '0000-00-00', '0000-00-00'),
 (5, 'PruebaB', 'Empleado', '', '5556667', 'A', '2017-10-29 20:01:01', '72411115', '', '', '', '', '0000-00-00', '0000-00-00'),
 (6, 'Juan Carlos', 'Lopez', '', '', 'A', '2018-01-09 21:35:32', '', '', '', '', '', '0000-00-00', '0000-00-00'),
-(7, 'sss', 'sss', 'ss', '333', 'A', '2018-01-09 21:40:49', '3333', '333', 'ddd', 'email@email.com', 'Oruro', '1994-08-09', '2018-01-16'),
-(8, 'Carlos', 'Camacho', 'Felipes', '388374783', 'A', '2018-01-19 10:39:16', '38883883', '38388388', 'Pagador 343 Esq Ayacucho', 'camacho@email.com', 'Oruro', '1985-02-05', '2010-04-04');
+(7, 'sss', 'sss', 'ss', '333', 'A', '2018-01-09 21:40:49', '3333', '333', 'ddd', 'email@email.com', 'Oruro', '1994-08-09', '2018-01-16');
 
 -- --------------------------------------------------------
 
@@ -190,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `roles_usuario` (
   `id_rol` int(11) NOT NULL,
   `fecha_registro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `estado` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `roles_usuario`
@@ -198,10 +197,9 @@ CREATE TABLE IF NOT EXISTS `roles_usuario` (
 
 INSERT INTO `roles_usuario` (`id_roles_usuario`, `id_usuario`, `id_rol`, `fecha_registro`, `estado`) VALUES
 (1, 1, 1, '2017-11-08 04:00:00', 1),
-(2, 2, 5, '2017-11-08 04:00:00', 1),
+(2, 2, 2, '2017-11-08 04:00:00', 1),
 (3, 8, 3, '2017-11-08 04:00:00', 1),
-(4, 9, 3, '2018-01-13 14:55:22', 1),
-(5, 10, 4, '2018-01-19 10:39:53', 1);
+(4, 9, 3, '2018-01-13 14:55:22', 1);
 
 -- --------------------------------------------------------
 
@@ -218,17 +216,16 @@ CREATE TABLE IF NOT EXISTS `solicitud_analisis_lq` (
   `fecha_entrega` timestamp NULL DEFAULT NULL,
   `numero_hoja_ruta` varchar(10) DEFAULT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `estado` char(1) NOT NULL DEFAULT 'E'
+  `id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `solicitud_analisis_lq`
 --
 
-INSERT INTO `solicitud_analisis_lq` (`id_solicitud_analisis_lq`, `cantidad_muestras`, `tipo_muestra`, `procedencia`, `fecha_recepcion`, `fecha_entrega`, `numero_hoja_ruta`, `id_usuario`, `id_cliente`, `estado`) VALUES
-(1, 5, 'Mineral', 'sds', '2017-11-19 21:09:58', '0000-00-00 00:00:00', 'ror282', 8, 1, 'A'),
-(3, 3, 'Mineral', 'qwq', '2017-11-19 21:32:38', '2017-11-23 04:00:00', 'qwe', 8, 1, 'A');
+INSERT INTO `solicitud_analisis_lq` (`id_solicitud_analisis_lq`, `cantidad_muestras`, `tipo_muestra`, `procedencia`, `fecha_recepcion`, `fecha_entrega`, `numero_hoja_ruta`, `id_usuario`, `id_cliente`) VALUES
+(1, 5, 'Mineral', 'sds', '2017-11-19 21:09:58', '0000-00-00 00:00:00', 'ror282', 8, 1),
+(3, 3, 'Mineral', 'qwq', '2017-11-19 21:32:38', '2017-11-23 04:00:00', 'qwe', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -256,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id_empleado` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   `fecha_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -266,8 +263,7 @@ INSERT INTO `usuario` (`id_usuario`, `usuario`, `clave`, `id_empleado`, `estado`
 (1, 'marina', 'ce5225d01c39d2567bc229501d9e610d', 1, 1, '0000-00-00 00:00:00'),
 (2, 'juan', 'a94652aa97c7211ba8954dd15a3cf838', 2, 1, '0000-00-00 00:00:00'),
 (8, 'prueba', 'c893bad68927b457dbed39460e6afd62', 4, 1, '2017-11-19 11:54:47'),
-(9, 'gladys', '05fe03b494c0f1a7d6cb49f0bf3fd70d', 3, 1, '2018-01-13 15:15:39'),
-(10, 'carlos', 'dc599a9972fde3045dab59dbd1ae170b', 8, 1, '2018-01-19 10:39:53');
+(9, 'gladys', '05fe03b494c0f1a7d6cb49f0bf3fd70d', 3, 1, '2018-01-13 15:15:39');
 
 --
 -- Índices para tablas volcadas
@@ -362,7 +358,7 @@ MODIFY `id_prueba_elemento` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `ensayo`
 --
@@ -382,7 +378,7 @@ MODIFY `id_rol` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT de la tabla `roles_usuario`
 --
 ALTER TABLE `roles_usuario`
-MODIFY `id_roles_usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id_roles_usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `solicitud_analisis_lq`
 --
@@ -397,7 +393,7 @@ MODIFY `id_tecnico` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --
